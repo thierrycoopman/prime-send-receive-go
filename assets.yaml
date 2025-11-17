@@ -1,0 +1,7 @@
+assets:
+  - symbol: "USDC"
+    network: "ethereum-mainnet"
+  - symbol: "USDC"
+    network: "base-mainnet"
+  - symbol: "BTC"
+    network: "bitcoin-mainnet"
