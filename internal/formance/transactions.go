@@ -214,13 +214,11 @@ const numscriptWithdrawalFailedPlatformRoundTrip = `vars {
   string $prime_api_symbol
 }
 
-// Posting 1: record the withdrawal attempt (wallet → pending)
 send [$asset $amount] (
   source = @prime:portfolio:$portfolio_id:wallets:$wallet_id allowing unbounded overdraft
   destination = @prime:portfolio:$portfolio_id:withdrawals:pending
 )
 
-// Posting 2: record the failure/reversal (pending → wallet)
 send [$asset $amount] (
   source = @prime:portfolio:$portfolio_id:withdrawals:pending
   destination = @prime:portfolio:$portfolio_id:wallets:$wallet_id
@@ -473,7 +471,7 @@ func (s *Service) ConfirmDeposit(ctx context.Context, address, asset string, amo
 	}
 
 	zap.L().Info("Deposit confirmed in Formance (pending to user)",
-		zap.String("user_id", user.Id),
+		zap.String("user_id", userId),
 		zap.String("asset", canonicalSymbol),
 		zap.String("amount", amount.String()))
 	return nil
